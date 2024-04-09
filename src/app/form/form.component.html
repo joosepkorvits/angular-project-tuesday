@@ -1,1 +1,48 @@
-<p>form works!</p>
+<app-message [text]="messageText" [type]="messageType"></app-message>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="name">Name &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" formControlName="name">
+        <div *ngIf="form.controls['name'].invalid && (form.controls['name'].dirty || form.controls['name'].touched)">
+            <p>Error: Name is required.</p>
+        </div>
+    </div>
+
+    <div>
+        <label for="surname">Surname</label>
+        <input type="text" formControlName="surname">
+        <div
+            *ngIf="form.controls['surname'].invalid && (form.controls['surname'].dirty || form.controls['surname'].touched)">
+            <p>Error: Surname is required.</p>
+        </div>
+    </div>
+
+    <div>
+        <label for="email">Email &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="email" formControlName="email">
+        <div
+            *ngIf="form.get('email')?.errors?.['required'] && (form.get('email')?.dirty || form.get('email')?.touched)">
+            <p>Error: Email is required.</p>
+        </div>
+        <div *ngIf="form.get('email')?.errors?.['email'] && (form.get('email')?.dirty || form.get('email')?.touched)">
+            <p>Error: Enter a valid email address.</p>
+        </div>
+    </div>
+
+    <div>
+        <label for="workingExperience">Working experience (months) </label>
+        <input type="text" formControlName="workingExperience">
+        <div
+            *ngIf="form.controls['workingExperience'].invalid && (form.controls['workingExperience'].dirty || form.controls['workingExperience'].touched)">
+            <p>Error: Working experience is required and must be a number with up to 1 decimal place.</p>
+        </div>
+    </div>
+
+    <div>
+        <button type="submit" [disabled]="form.invalid">Submit</button>
+        <button type="button" (click)="onReset()">Reset</button>
+    </div>
+
+</form>

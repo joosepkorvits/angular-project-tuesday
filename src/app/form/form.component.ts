@@ -1,10 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrls: ['./form.component.scss']
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
+  form!: FormGroup;
+  messageText: string = '';
+  messageType: 'info' | 'error' | 'success' = 'info';
 
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      workingExperience: ['', [Validators.required, this.customNumberValidator(1)]]
+    });
+  }
+
+  customNumberValidator(decimalPlaces: number) {
+    return Validators.pattern(new RegExp(`^\\d+(\\.\\d{0,${decimalPlaces}})?$`));
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.messageText = 'Form is valid and has been submitted!';
+      this.messageType = 'success';
+      console.log('Form is valid:', this.form.value);
+    } else {
+      this.messageText = 'Form is not valid, please check the fields.';
+      this.messageType = 'error';
+      console.error('Form is not valid');
+    }
+  }
+
+  onReset() {
+    this.form.reset();
+    this.messageText = 'Form has been reset.';
+    this.messageType = 'info';
+  }
 }

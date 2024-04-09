@@ -1,0 +1,20 @@
+.info {
+    background: #2196f3;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.error {
+    background: #e53935;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.success {
+    background: #4caf50;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
