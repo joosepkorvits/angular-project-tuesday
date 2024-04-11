@@ -30,11 +30,9 @@ export class FormComponent implements OnInit {
     if (this.form.valid) {
       this.messageText = 'Form is valid and has been submitted!';
       this.messageType = 'success';
-      console.log('Form is valid:', this.form.value);
     } else {
       this.messageText = 'Form is not valid, please check the fields.';
       this.messageType = 'error';
-      console.error('Form is not valid');
     }
   }
 

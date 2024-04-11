@@ -1,5 +1,6 @@
 <app-message [text]="messageText" [type]="messageType"></app-message>
 
+
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <div>
@@ -41,7 +42,7 @@
     </div>
 
     <div>
-        <button type="submit" [disabled]="form.invalid">Submit</button>
+        <button type="submit">Submit</button>
         <button type="button" (click)="onReset()">Reset</button>
     </div>
 
